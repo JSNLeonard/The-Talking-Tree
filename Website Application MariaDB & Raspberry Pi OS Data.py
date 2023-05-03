@@ -5,11 +5,11 @@ from flask import Flask, request
 import time
 
 # Initialize a new Flask application instance.
-app = Flask(__name__, template_folder='/home/xampp/htdocs')
+app = Flask(__name__, template_folder='/var/www/html')
 
 # Create a new route for handling POST requests.
-@app.route('/send_info', methods=['POST'])
-def send_info():
+@app.route('/send_question', methods=['POST'])
+def send_question():
     # Retrieve the values of the form fields.
     first_name = request.form['first_name']
     last_name = request.form['last_name']
@@ -53,7 +53,55 @@ def send_info():
         conn.close()
 
     # Return a message to indicate that the form was successfully submitted.
-    return "Thank You For Your Submission!"
+    return "Thank You For Your Submission and Question!"
+
+# Create a new route for handling POST requests.
+@app.route('/send_story', methods=['POST'])
+def send_story():
+    # Retrieve the values of the form fields.
+    first_name = request.form['first_name']
+    last_name = request.form['last_name']
+    story = request.form['story']
+    photo = request.files['photo']
+    timestamp = int(time.time())
+    
+    # Create a unique filename for the uploaded photo.
+    photo_filename = f"{first_name}_{last_name}_{timestamp}.png"
+    photo_folder = "/home/pi/Documents/The-Talking-Tree/Images"
+    photo_path = os.path.join(photo_folder, photo_filename)
+    
+    # Create the folder to store the uploaded photo if it doesn't already exist.
+    if not os.path.exists(photo_folder):
+        os.makedirs(photo_folder)
+    
+    try:
+        # Save the uploaded photo to the specified folder.
+        photo.save(photo_path)
+        print('File Saved:', photo_path)
+    except Exception as e:
+        print('Error Saving File:', e)
+    
+    try:
+        # Connect to the MariaDB database and insert the form data into the 'user_data' table.
+        conn = mariadb.connect(
+            user="root",
+            password="TalkingTree2023",
+            host="localhost",
+            port=3306,
+            database="TalkingTree"
+        )
+        cur = conn.cursor()
+        cur.execute("INSERT INTO user_data (first_name, last_name, story, image, timestamp) VALUES (?, ?, ?, ?, NOW())", (first_name, last_name, story, photo_filename))
+        conn.commit()
+        print("Data Inserted Into Database")
+    except Exception as e:
+        print("Error Inserting Data Into Database:", e)
+    finally:
+        # Close the database connection.
+        conn.close()
+
+    # Return a message to indicate that the form was successfully submitted.
+    return "Thank You For Your Submission and Story!"
 
 # Run the Flask application.
 if __name__ == '__main__':
