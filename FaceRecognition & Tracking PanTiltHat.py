@@ -1,5 +1,5 @@
-# Importing required libraries such as OpenCV, Sys, Time, OS, PanTiltHat, and FaceRecognition.
-import cv2, sys, time, os
+# Importing required libraries such as OpenCV, Sys, Time, OS, GLOB, PanTiltHat, and FaceRecognition.
+import cv2, sys, time, os, glob
 from pantilthat import *
 from FaceRecognition import FaceRecognition
 
@@ -14,8 +14,8 @@ FRAME_W = 640
 FRAME_H = 480
 
 # Initializing variables for pan and tilt angles.
-cam_pan = 0
-cam_tilt = 0
+cam_pan = 90
+cam_tilt = 90
 
 # Loading the face detection model.
 cascPath = '/home/pi/Documents/The-Talking-Tree/lbpcascade_frontalface_improved.xml'
@@ -39,6 +39,11 @@ recognized_face_names = []
 
 # Looping indefinitely to detect and track faces.
 while True:
+    # Check for new files added to "Images" folder and reload the images if necessary.
+    if last_modified_time != os.path.getmtime("Images/"):
+        fr.load_encoding_images("Images/")
+        last_modified_time = os.path.getmtime("Images/")
+
     ret, frame1 = cap.read()
     frame1 = cv2.flip(frame1, -1)
 

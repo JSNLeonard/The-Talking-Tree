@@ -33,6 +33,9 @@ while True:
 
         # Loop through the files in the directory.
         for file_name in os.listdir(directory_path):
+            # Skip the "Default.jpg" file.
+            if file_name == "Default.jpg":
+                continue
             file_path = os.path.join(directory_path, file_name)
 
             # Get the last modification time of the file.
