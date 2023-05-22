@@ -16,7 +16,7 @@
     </style>
 
     <!-- Form to submit questions and take a selfie -->
-    <form method="post" action="http://192.168.0.41:5000/send_question" enctype="multipart/form-data" onsubmit="submitFormOnce(this); return false;">
+    <form method="post" action="http://10.141.7.131:5000/send_question" enctype="multipart/form-data" onsubmit="submitFormOnce(this); return false;">
         <div class="form-group">
             <h1>Talking Tree (Question)</h1>
             <h5>Enter Your First & Last Name, Ask A Question & Take A Selfie Below</h5>
@@ -73,7 +73,7 @@
                 formData.append('photo', photoDataUrl);
 
                 // Send a POST request with the form data.
-                const response = await fetch('http://192.168.0.41:5000/send_question', {
+                const response = await fetch('http://10.141.7.131:5000/send_question', {
                     method: 'POST',
                     body: formData,
                 });

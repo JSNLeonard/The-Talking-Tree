@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    
+
     <!-- Styling for the background image -->
     <style>
         body {
@@ -16,15 +16,15 @@
     </style>
 
     <!-- Form to submit questions and take a selfie -->
-    <form method="post" action="http://192.168.0.41:5000/send_question" enctype="multipart/form-data" onsubmit="submitFormOnce(this); return false;">
+    <form method="post" action="http://10.141.7.131:5000/send_story" enctype="multipart/form-data" onsubmit="submitFormOnce(this); return false;">
         <div class="form-group">
-            <h1>Talking Tree (Question)</h1>
-            <h5>Enter Your First & Last Name, Ask A Question & Take A Selfie Below</h5>
+            <h1>Talking Tree (Story)</h1>
+            <h5>Enter Your First & Last Name, Share A Story & Take A Selfie Below</h5>
             <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Enter Your First Name" required>
             <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Enter Your Last Name" required>
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" name="question" id="question" placeholder="Ask A Question" required>
+            <input type="text" class="form-control" name="story" id="story" placeholder="Share A Story" required>
         </div>
         <div class="form-group">
             <input type="file" accept="image/*" capture="camera" id="photo-upload-input" name="photo" required>
@@ -73,7 +73,7 @@
                 formData.append('photo', photoDataUrl);
 
                 // Send a POST request with the form data.
-                const response = await fetch('http://192.168.0.41:5000/send_question', {
+                const response = await fetch('http://10.141.7.131:5000/send_story', {
                     method: 'POST',
                     body: formData,
                 });
@@ -100,7 +100,7 @@ $username = 'JasonLeonard';
 $password = '2!fP5zqS$hf8Qw';
 
 // Function to send form data as a message to MQTT.
-function sendFormDataToMQTT($first_name, $last_name, $question, $image_filename)
+function sendFormDataToMQTT($first_name, $last_name, $story, $image_filename)
 {
     global $broker, $port, $message_topic, $image_topic, $client_id, $username, $password;
 
@@ -109,7 +109,7 @@ function sendFormDataToMQTT($first_name, $last_name, $question, $image_filename)
     if ($mqtt->connect(true, NULL, $username, $password)) {
 
         // Publish the form data as a message.
-        $payload = "$first_name,$last_name,$question,$image_filename";
+        $payload = "$first_name,$last_name,$story,$image_filename";
         $mqtt->publish($message_topic, $payload, 1);
 
         // Send the image over MQTT.
@@ -154,11 +154,11 @@ function sendImageToMQTT($first_name, $last_name, $image_filename)
 // Get the form data.
 $first_name = isset($_POST['first_name']) ? $_POST['first_name'] : '';
 $last_name = isset($_POST['last_name']) ? $_POST['last_name'] : '';
-$question = isset($_POST['question']) ? $_POST['question'] : '';
+$story = isset($_POST['story']) ? $_POST['story'] : '';
 $image_filename = isset($_FILES['photo']['tmp_name']) ? $_FILES['photo']['tmp_name'] : '';
 
 // Send the form data to MQTT.
-sendFormDataToMQTT($first_name, $last_name, $question, $image_filename);
+sendFormDataToMQTT($first_name, $last_name, $story, $image_filename);
 
 // Redirect back to the home page.
 exit();

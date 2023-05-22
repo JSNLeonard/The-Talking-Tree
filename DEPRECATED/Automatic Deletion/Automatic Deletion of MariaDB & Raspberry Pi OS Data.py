@@ -1,3 +1,12 @@
+# Name: Jason Leonard
+
+# Project Name: Talking Tree
+
+# File Name: Automatic Deletion of MariaDB & Raspberry Pi OS Data.py
+
+# File Description: This code is a Python script that monitors a directory for files older than 12 hours and deletes them.
+# ################# It also deletes records from a MariaDB database table older than 12 hours.
+
 # Importing OS, Time, Datetime, and MariaDB libraries.
 import os
 import time
@@ -16,6 +25,7 @@ try:
     cur = conn.cursor()
     print("Connected to the database!")
     
+# Catches any exceptions that occur while connecting to the database.
 except Exception as e:
     print("Error connecting to the database:", e)
     exit()
@@ -23,8 +33,10 @@ except Exception as e:
 # Set the path of the directory to monitor for deletion.
 directory_path = "/home/pi/Documents/The-Talking-Tree/Images"
 
+# Runs an infinite while loop while the following is true.
 while True:
     try:
+
         # Get the current date and time.
         now = datetime.datetime.now()
 
@@ -33,6 +45,10 @@ while True:
 
         # Loop through the files in the directory.
         for file_name in os.listdir(directory_path):
+
+            # Skip the "Default.jpg" file.
+            if file_name == "Default.jpg":
+                continue
             file_path = os.path.join(directory_path, file_name)
 
             # Get the last modification time of the file.
@@ -43,6 +59,7 @@ while True:
 
             # Check if the file is older than 12 hours.
             if modified_time < time_threshold:
+
                 # Delete the file.
                 os.remove(file_path)
                 print(f"{file_name} deleted from the directory.")
@@ -61,12 +78,12 @@ while True:
         # Sleep for 1 hour before checking again.
         time.sleep(60 * 60) # Sleep for 1 hour.
         
+    # Catch keyboard interrupt to stop the script gracefully.
     except KeyboardInterrupt:
-        # Catch keyboard interrupt to stop the script gracefully.
         break
     
+    # Catch all other exceptions and print an error message.
     except Exception as e:
-        # Catch all other exceptions and print an error message.
         print("An error occurred. Retrying in 10 seconds...")
         print(e)
         time.sleep(10)
