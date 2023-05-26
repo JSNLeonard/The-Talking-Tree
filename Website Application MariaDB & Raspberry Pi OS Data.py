@@ -29,6 +29,8 @@ def send_question():
     # Retrieve the values of the form fields.
     first_name = request.form['first_name']
     last_name = request.form['last_name']
+    parent_first_name = request.form['parent_first_name']
+    parent_last_name = request.form['parent_last_name']
     question = request.form['question']
     photo = request.files['photo']
     timestamp = int(time.time())
@@ -45,11 +47,11 @@ def send_question():
     # Save the uploaded photo to the specified folder.
     try:
         photo.save(photo_path)
-        print('File Saved:', photo_path)
-
+        print('File saved:', photo_path)
+    
     # Catch any exception that may occur while saving a file locally.
     except Exception as e:
-        print('Error Saving File:', e)
+        print('Error saving file:', e)
     
     # Connect to the MariaDB database and insert the form data into the 'user_data' table.
     try:
@@ -61,20 +63,32 @@ def send_question():
             database="TalkingTree"
         )
         cur = conn.cursor()
-        cur.execute("INSERT INTO user_data (first_name, last_name, question, image, timestamp) VALUES (?, ?, ?, ?, NOW())", (first_name, last_name, question, photo_filename))
+        cur.execute("INSERT INTO user_data (first_name, last_name, parent_first_name, parent_last_name, question, image, timestamp) VALUES (?, ?, ?, ?, ?, ?, NOW())", (first_name, last_name, parent_first_name, parent_last_name, question, photo_filename))
         conn.commit()
-        print("Data Inserted Into Database")
+        print("Data inserted into database")
 
     # Catch any exception that may occur while inserting data into a database.
     except Exception as e:
-        print("Error Inserting Data Into Database:", e)
+        print("Error inserting data into database:", e)
 
     # Close the database connection.
     finally:
         conn.close()
 
     # Return a message to indicate that the form was successfully submitted.
-    return "Thank You For Your Submission and Question!"
+    return """
+    <style>
+        body {
+            overflow: hidden;
+        }
+    </style>
+    <script>
+        setTimeout(function() {
+            window.location.href = 'http://10.141.7.131/index.php';
+        }, 5000);
+    </script>
+    <p style='color: black; font-family: Helvetica, Arial, sans-serif; font-weight: bold; font-size: 18px; display: flex; justify-content: center; align-items: center; height: 100vh;'>Thank You For Your Submission and Question!</p>
+    """
 
 # Create a new route for handling POST requests.
 @app.route('/send_story', methods=['POST'])
@@ -83,6 +97,8 @@ def send_story():
     # Retrieve the values of the form fields.
     first_name = request.form['first_name']
     last_name = request.form['last_name']
+    parent_first_name = request.form['parent_first_name']
+    parent_last_name = request.form['parent_last_name']
     story = request.form['story']
     photo = request.files['photo']
     timestamp = int(time.time())
@@ -99,11 +115,11 @@ def send_story():
     # Save the uploaded photo to the specified folder.
     try:
         photo.save(photo_path)
-        print('File Saved:', photo_path)
+        print('File saved:', photo_path)
     
     # Catch any exception that may occur while saving a file locally.
     except Exception as e:
-        print('Error Saving File:', e)
+        print('Error saving file:', e)
 
     # Connect to the MariaDB database and insert the form data into the 'user_data' table.
     try:
@@ -115,9 +131,9 @@ def send_story():
             database="TalkingTree"
         )
         cur = conn.cursor()
-        cur.execute("INSERT INTO user_data (first_name, last_name, story, image, timestamp) VALUES (?, ?, ?, ?, NOW())", (first_name, last_name, story, photo_filename))
+        cur.execute("INSERT INTO user_data (first_name, last_name, parent_first_name, parent_last_name, story, image, timestamp) VALUES (?, ?, ?, ?, ?, ?, NOW())", (first_name, last_name, parent_first_name, parent_last_name, story, photo_filename))
         conn.commit()
-        print("Data Inserted Into Database")
+        print("Data inserted into database")
 
     # Catch any exception that may occur while inserting data into a database.
     except Exception as e:
@@ -128,7 +144,19 @@ def send_story():
         conn.close()
 
     # Return a message to indicate that the form was successfully submitted.
-    return "Thank You For Your Submission and Story!"
+    return """
+    <style>
+        body {
+            overflow: hidden;
+        }
+    </style>
+    <script>
+        setTimeout(function() {
+            window.location.href = 'http://10.141.7.131/index.php';
+        }, 5000);
+    </script>
+    <p style='color: black; font-family: Helvetica, Arial, sans-serif; font-weight: bold; font-size: 18px; display: flex; justify-content: center; align-items: center; height: 100vh;'>Thank You For Your Submission and Story!</p>
+    """
 
 # Run the Flask application.
 if __name__ == '__main__':

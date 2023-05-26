@@ -49,7 +49,7 @@ fr = FaceRecognition()
 last_modified_time = os.path.getmtime("Images/")
 fr.load_encoding_images("Images/")
 
-# Initialising variables for the face recognition, adding a timer  as to when the last time a face was recognised.
+# Initialising variables for the face recognition, adding a timer as to when the last time a face was recognised.
 last_recognized_time = time.time()
 recognized_face_locations = []
 recognized_face_names = []

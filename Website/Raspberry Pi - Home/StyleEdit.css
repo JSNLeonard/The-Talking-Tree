@@ -101,6 +101,9 @@ input:active {
 }
 
 .frosty-btn {
+    font-family: Helvetica;
+    font-size: 0.9em;
+    font-weight: Bold;
     background-color: white;
     color: black;
     padding: 14px 20px;
@@ -133,6 +136,86 @@ input:active {
 
 @media (min-width: 320px) {
     .frosty-btn:active {
+        max-width: 3840px;
+    }
+}
+
+.frosty-btn-selfie {
+    font-family: Helvetica;
+    font-size: 0.9em;
+    font-weight: Bold;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+@media (min-width: 320px) {
+    .frosty-btn-selfie {
+        max-width: 3840px;
+    }
+}
+
+.frosty-btn-selfie:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+@media (min-width: 320px) {
+    .frosty-btn-selfie:hover {
+        max-width: 3840px;
+    }
+}
+
+.frosty-btn-selfie:active {
+    background-color: rgba(110, 110, 110, 0.5);
+}
+
+@media (min-width: 320px) {
+    .frosty-btn-selfie:active {
+        max-width: 3840px;
+    }
+}
+
+.frosty-btn-upload {
+    font-family: Helvetica;
+    font-size: 0.9em;
+    font-weight: Bold;
+    background-color: rgba(110, 110, 110, 1);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+@media (min-width: 320px) {
+    .frosty-btn-upload {
+        max-width: 3840px;
+    }
+}
+
+.frosty-btn-upload:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+@media (min-width: 320px) {
+    .frosty-btn-upload:hover {
+        max-width: 3840px;
+    }
+}
+
+.frosty-btn-upload:active {
+    background-color: rgba(110, 110, 110, 0.5);
+}
+
+@media (min-width: 320px) {
+    .frosty-btn-upload:active {
         max-width: 3840px;
     }
 }
@@ -277,6 +360,26 @@ input:active {
     }
 }
 
+.form-control-parent {
+    background-color: gray;
+    color: white;
+    height: 100%;
+    width: 100%;
+    padding: 5px 5px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 25px;
+    text-align: center;
+}
+
+@media (min-width: 200px) {
+    .form-control-parent {
+        max-width: 500px;
+        margin: 8px 0;
+    }
+}
+
 .form-group {
     color: white;
     position: relative;
@@ -288,91 +391,5 @@ input:active {
     .form-group {
         max-width: 500px;
         margin: 8px 0;
-    }
-}
-
-.custom-file-upload {
-    background-color: rgba(255, 255, 255, 1);
-    color: rgb(0, 0, 0);
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 12px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 50px;
-    transition: background-color 0.5s ease;
-    box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.2);
-}
-
-@media (min-width: 320px) {
-    .custom-file-upload {
-        max-width: 3840px;
-    }
-}
-
-.custom-file-upload:hover {
-    background-color: rgba(255, 255, 255, 0.5);
-    color: white;
-}
-
-@media (min-width: 320px) {
-    .custom-file-upload:hover {
-        max-width: 3840px;
-    }
-}
-
-.custom-file-upload:active {
-    background-color: rgba(110, 110, 110, 0.5);
-    color: white;
-}
-
-@media (min-width: 320px) {
-    .custom-file-upload:active {
-        max-width: 3840px;
-    }
-}
-
-.take-selfie {
-    background-color: rgb(255, 255, 255, 1);
-    color: rgb(0, 0, 0);
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 12px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 50px;
-    transition: background-color 0.5s ease;
-    box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.2);
-}
-
-@media (min-width: 320px) {
-    .take-selfie {
-        max-width: 3840px;
-    }
-}
-
-.take-selfie:hover {
-    background-color: rgba(255, 255, 255, 0.5);
-    color: white;
-}
-
-@media (min-width: 320px) {
-    .take-selfie:hover {
-        max-width: 3840px;
-    }
-}
-
-.take-selfie:active {
-    background-color: rgba(110, 110, 110, 0.5);
-    color: white;
-}
-
-@media (min-width: 320px) {
-    .take-selfie:active {
-        max-width: 3840px;
     }
 }
