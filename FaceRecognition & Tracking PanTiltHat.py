@@ -77,6 +77,33 @@ while True:
 
     # Detecting faces in the grayscale frame using the cascade classifier.
     faces = faceCascade.detectMultiScale(frame1, 1.1, 3, 0, (10, 10))
+
+    # Check if it's been at least 2 seconds since the last time the faces were recognised.
+    if time.time() - last_recognized_time >= 2:
+
+        # Detects the known faces in the current frame using the detect_known_faces() method of the fr object (which is a FaceRecogniser object created earlier).
+        face_locations, face_names = fr.detect_known_faces(frame1)
+
+        # Assigns the recognised face locations to a variable called recognized_face_locations.
+        recognized_face_locations = face_locations
+
+        # Assigns the recognised face names to a variable called recognized_face_names.
+        recognized_face_names = face_names
+
+        # Updates the value of last_recognized_time to the current time.
+        last_recognized_time = time.time()
+
+    # Iterates over the recognised face locations and names using the built-in zip() function.
+    for face_loc, name in zip(recognized_face_locations, recognized_face_names):
+
+        # Unpacks the face location into 4 variables (top, right, bottom, left).
+        y1, x2, y2, x1 = face_loc[0], face_loc[1], face_loc[2], face_loc[3]
+
+        # Draws the recognised name of the person above their face using the putText() method of the OpenCV library.
+        cv2.putText(frame1, name,(x1, y1 - 10), cv2.FONT_HERSHEY_DUPLEX, 1, (0, 0, 200), 2)
+
+        # Draws a rectangle around the recognised face using the rectangle() method of the OpenCV library.
+        cv2.rectangle(frame1, (x1, y1), (x2, y2), (0, 0, 200), 4)
     
     # Looping through each face detected.
     for (x, y, w, h) in faces:
@@ -113,33 +140,6 @@ while True:
 
         # Break out of the loop after processing the first detected face.
         break
-
-    # Check if it's been at least 2 seconds since the last time the faces were recognised.
-    if time.time() - last_recognized_time >= 2:
-
-        # Detects the known faces in the current frame using the detect_known_faces() method of the fr object (which is a FaceRecogniser object created earlier).
-        face_locations, face_names = fr.detect_known_faces(frame1)
-
-        # Assigns the recognised face locations to a variable called recognized_face_locations.
-        recognized_face_locations = face_locations
-
-        # Assigns the recognised face names to a variable called recognized_face_names.
-        recognized_face_names = face_names
-
-        # Updates the value of last_recognized_time to the current time.
-        last_recognized_time = time.time()
-
-    # Iterates over the recognised face locations and names using the built-in zip() function.
-    for face_loc, name in zip(recognized_face_locations, recognized_face_names):
-
-        # Unpacks the face location into 4 variables (top, right, bottom, left).
-        y1, x2, y2, x1 = face_loc[0], face_loc[1], face_loc[2], face_loc[3]
-
-        # Draws the recognised name of the person above their face using the putText() method of the OpenCV library.
-        cv2.putText(frame1, name,(x1, y1 - 10), cv2.FONT_HERSHEY_DUPLEX, 1, (0, 0, 200), 2)
-
-        # Draws a rectangle around the recognised face using the rectangle() method of the OpenCV library.
-        cv2.rectangle(frame1, (x1, y1), (x2, y2), (0, 0, 200), 4)
 
     # Displays the current frame with recognised faces and names in a window titled "Face Tracking & Face Recognition".
     cv2.imshow("Face Tracking & Face Recognition", frame1)

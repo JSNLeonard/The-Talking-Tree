@@ -43,20 +43,19 @@
     </div>
 </form>
 <script>
-    // Retrieve parent's first name and last name from local storage
+    // Retrieve parent's first name and last name from local storage.
     const parentFirstName = localStorage.getItem("parentFirstName");
     const parentLastName = localStorage.getItem("parentLastName");
 
-    // Update the input fields with the parent's name
+    // Update the input fields with the parent's name.
     const parentFirstNameInput = document.getElementById("parent_first_name");
     const parentLastNameInput = document.getElementById("parent_last_name");
     parentFirstNameInput.value = parentFirstName;
     parentLastNameInput.value = parentLastName;
 
-    // Disable the input fields for the parent's name
+    // Disable the input fields for the parent's name.
     parentFirstNameInput.readOnly = true;
     parentLastNameInput.readOnly = true;
-
    
     // JavaScript code to handle taking a photo and submitting the form.
     error_reporting(E_ALL);

@@ -2,7 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="StyleEdit.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 </head>
 <body>
     
@@ -51,14 +51,24 @@
     <div class="text-overlay" style="z-index: 1;">
         <h1>Welcome to the "Talking Tree"</h1>
         <h5>Select an Option Below to Begin</h5>
-        <input type="submit" class="frosty-btn" onclick="if (localStorage.getItem('consent') === 'true' || localStorage.getItem('consentChild') === 'true') { window.location.href = 'Question.php'; } else { modal.style.display = 'block'; }" value="Ask A Question">
-        <input type="submit" class="frosty-btn" onclick="if (localStorage.getItem('consent') === 'true' || localStorage.getItem('consentChild') === 'true') { window.location.href = 'Story.php'; } else { modal.style.display = 'block'; }" value="Tell A Story">
+        <input type="submit" class="frosty-btn" onclick="handleButtonClick('Question.php')" value="Ask A Question">
+        <input type="submit" class="frosty-btn" onclick="handleButtonClick('Story.php')" value="Share A Story">
         <br>
-        <input type="submit" class="frosty-btn" onclick="if (localStorage.getItem('consent') === 'true' || localStorage.getItem('consentChild') === 'true') { window.location.href = 'About.php'; } else { modal.style.display = 'block'; }" value="About">
+        <input type="submit" class="frosty-btn" onclick="handleButtonClick('About.php')" value="About">
     </div>
 
     <!-- JavaScript code -->
     <script>
+
+        function handleButtonClick(nextPage) {
+            if (localStorage.getItem('consent') === 'true' || localStorage.getItem('consentChild') === 'true') {
+                // Redirect to the next page.
+                window.location.href = nextPage;
+            } else {
+                // Display the GDPR modal.
+                modal.style.display = 'block';
+            }
+        }
 
         // Getting the required elements.
         var modal = document.getElementById("gdpr-modal");
@@ -104,27 +114,36 @@
 
         // Handle consent button click event.
         consentBtn.onclick = function() {
-            modal.style.display = "none";
+            modal.style.display = 'none';
 
             if (consentCheckbox.checked) {
-                localStorage.setItem("consent", "true"); // Store consent status in local storage.
+                localStorage.setItem('consent', 'true'); // Store consent status in local storage.
             }
 
             if (consentCheckboxChild.checked) {
                 var parentFirstName = parentFirstNameInput.value.trim();
                 var parentLastName = parentLastNameInput.value.trim();
-                if (parentFirstName === "" || parentLastName === "") {
+                if (parentFirstName === '' || parentLastName === '') {
                     alert("Please enter both the parent's first name and last name.");
                     return;
                 }
-                localStorage.setItem("consentChild", "true"); // Store child's consent status inn local storage.
-                localStorage.setItem("parentFirstName", parentFirstName); // Store parent's first name in local storage.
-                localStorage.setItem("parentLastName", parentLastName); // Store parent's last name in local storage.
+                localStorage.setItem('consentChild', 'true'); // Store child's consent status in local storage.
+                localStorage.setItem('parentFirstName', parentFirstName); // Store parent's first name in local storage.
+                localStorage.setItem('parentLastName', parentLastName); // Store parent's last name in local storage.
             }
 
             // Redirect to the index.php page.
             window.location.href = 'index.php';
         };
+
+        // Access parent's name from local storage on the next page
+        var parentFirstName = localStorage.getItem('parentFirstName');
+        var parentLastName = localStorage.getItem('parentLastName');
+        if (parentFirstName && parentLastName) {
+            // Insert the parent's name into the user's database or use it as needed.
+            console.log('Parent\'s First Name:', parentFirstName);
+            console.log('Parent\'s Last Name:', parentLastName);
+        }
     </script>
 </body>
 </html>

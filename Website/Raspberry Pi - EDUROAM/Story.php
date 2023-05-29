@@ -109,7 +109,7 @@
 // PHP code to handle MQTT communication and form data processing.
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-require("C:/xampp/htdocs/phpMQTT.php");
+require("/var/www/html/phpMQTT.php");
 
 // Define MQTT broker information.
 $broker = 'a40883bf34564fb493b81df755dd41cb.s2.eu.hivemq.cloud';
