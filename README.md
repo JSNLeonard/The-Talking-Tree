@@ -76,11 +76,9 @@ To connect the Raspberry Pi 4 with the Pan-Tilt HAT and the Camera Module V2, th
 
 ![IMG_3905](https://github.com/JSNLeonard/The-Talking-Tree/assets/48300764/413eb071-f864-4b5b-b481-0148cbd95320)
 
-## Video of System Operating
-
-![image](https://github.com/JSNLeonard/The-Talking-Tree/assets/48300764/9624529b-3552-4c25-9cb2-9826aa5ca0e7)
-
 # Design of Web Application
+
+I have successfully developed a user-friendly and accessible web application which can be seen above using HTML, CSS, JavaScript, and PHP. The application consists of multiple pages, including a home page, question submission page, story submission page, and an about page providing details about the project. The home page prominently features a GDPR prompt implemented as a modal window, ensuring transparency and user consent regarding data collection and usage. The prompt includes checkboxes for users above and below the age of 16, with the latter requiring additional parental consent by requesting the parent's first and last names. JavaScript code regulates the consent button, disabling it until the appropriate checkboxes are selected, and manages the submission of user consent data, demonstrating compliance with data protection regulations and a commitment to user privacy. The question and story pages provide a seamless experience for users to enter their first and last names, ask questions, share stories, and upload facial pictures. HTML's text-based inputs facilitate easy information entry, while JavaScript integrated with the CapacitorJS Camera plugin allows direct photo capture from the user's camera viewfinder.
 
 ## GDPR Modal Prompt
 
