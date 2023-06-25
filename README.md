@@ -1,4 +1,4 @@
-<p align="center"># The Talking Tree Final Year Project
+# The Talking Tree Final Year Project
 
 My final year project was part of a larger project overall known as the Talking Tree. My obective was to create an interactive system that allows users to submit information such as their first name, last name, question/story and a selfie of their face through a web application. This information is processed, stored in a MariaDB database, and their image is stored locally on a Raspberry Pi 4 through an embedded Python application. The system uses a Raspberry Pi 4 along with both a Camera Module V2 and a Pan-Tilt HAT Kit by Pimoroni to detect user's facial locations and adjust the camera position to focus and track the recognised face of a user. After the interaction, the system securely deletes the user's information.
 
@@ -110,4 +110,4 @@ I have successfully developed a user-friendly and accessible web application whi
 
 ## About Page
 
-![image](https://github.com/JSNLeonard/The-Talking-Tree/assets/48300764/c92584da-4994-4b93-9b5d-762ce4b24ac5)</p>
+![image](https://github.com/JSNLeonard/The-Talking-Tree/assets/48300764/c92584da-4994-4b93-9b5d-762ce4b24ac5)
