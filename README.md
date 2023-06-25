@@ -14,7 +14,7 @@ Long Video Description: https://www.youtube.com/watch?v=pRr75gRfAX0
 
 # Hardware Used
 
-Raspberry Pi 4
+## Raspberry Pi 4
 
 ![image](https://github.com/JSNLeonard/The-Talking-Tree/assets/48300764/e306a698-b34c-4d45-a5bf-bcc6d528b88d)
 
