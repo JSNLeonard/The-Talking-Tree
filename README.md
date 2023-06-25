@@ -7,4 +7,5 @@ The final product will be an interactive entity "Talking Tree", that will combin
 The rationale for this project is to build upon a previous iteration that successfully showcased a similar concept. The previous iteration, developed by members of the TU Dublin team, was featured in the Dublin Maker Fair. It involved an interactive entity with a face and a manual speech service so that an individual controlling the “entity” could engage with user’s when they approached it. Building upon this foundation, the Talking Tree project aims to explore the possibilities of using modern technology to create an even more immersive and captivating experience for users.
 
 Short Video Description: https://www.youtube.com/watch?v=SqtavO1BXxg
+
 Long Video Description: https://www.youtube.com/watch?v=pRr75gRfAX0
